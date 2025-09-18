@@ -5,7 +5,7 @@ import { ROOF_COEFF, PRICE_PER_L } from "../data/constants";
 
 export const useAssessment = create((set, get) => ({
   inputs: {
-    city: "Hyderabad", rainfallMm: 790,
+    city: "Delhi", rainfallMm: 790,
     roofAreaM2: 100, roofType: "rcc",
     openSpace: true, rockySoil: false, linearSpaceM: 0, dwellers: 4
   },
