@@ -1,0 +1,7 @@
+{
+  "Hyderabad": { "state": "Telangana", "rainfall_mm": 790 },
+  "Bengaluru": { "state": "Karnataka", "rainfall_mm": 970 },
+  "Chennai": { "state": "Tamil Nadu", "rainfall_mm": 1400 },
+  "Delhi": { "state": "Delhi", "rainfall_mm": 800 },
+  "Mumbai": { "state": "Maharashtra", "rainfall_mm": 2400 }
+}
