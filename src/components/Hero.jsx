@@ -60,6 +60,9 @@ export default function Hero() {
             Learn More
           </Button>
           </Link>
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow">
+            Start WhatsApp Chat
+          </Button>
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/20 text-white/80">

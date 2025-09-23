@@ -287,7 +287,7 @@ export default function Results() {
       {/* Optional site capacity rows (only if you compute them) */}
       <div className="pdf-grid-2" style={{ marginTop: 12 }}>
         <div className="pdf-card">
-          <div className="pdf-label">Surplus Recharge (Harvest − Stored)</div>
+          <div className="pdf-label">Surplus Recharge (min(Harvest − Stored,Site Capacity))</div>
           <div className="pdf-value">{fmtInt(results?.surplusRecharge)} L</div>
         </div>
         <div className="pdf-card">
