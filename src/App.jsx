@@ -5,6 +5,7 @@ import AssessForm from "./pages/AssessForm.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Guidelines from "./pages/Guidelines.jsx";
 
+
 export default function App() {
   return (
     <div className="min-h-screen w-full">
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/assess" element={<AssessForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/guidelines" element={<Guidelines />} />
+        <Route path="/results" element={<Results />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
