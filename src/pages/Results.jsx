@@ -1,42 +1,188 @@
+
+import React, { useMemo, useRef, useState } from "react";
 import { useAssessment } from "../store/useAssessment";
-import KPI from "../components/KPI";
 import ChartMonthly from "../components/ChartMonthly";
-import html2pdf from "html2pdf.js";
+import ErrorBoundary from "../components/ErrorBoundary";
 
-export default function Results(){
-  const { inputs, results } = useAssessment();
-  if (!results) return <div className="py-10">No results yet. <a href="/assess" className="text-indigo-600 underline">Run an assessment</a>.</div>;
 
-  const download = () => {
-    const el = document.getElementById("report");
-    html2pdf().from(el).save("Rainwater_Report.pdf");
+
+const fmtInt = (n) =>
+  typeof n === "number" && !isNaN(n) ? n.toLocaleString() : "-";
+const fmtInr = (n) =>
+  typeof n === "number" && !isNaN(n) ? `₹${n.toLocaleString()}` : "-";
+
+function KPI({ label, value, hint }) {
+  return (
+    <div className="p-4 rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <div className="text-xs text-gray-500">{label}</div>
+      <div className="text-xl font-semibold mt-1">{value}</div>
+      {hint ? (
+        <div className="text-[11px] text-gray-400 mt-1">{hint}</div>
+      ) : null}
+    </div>
+  );
+}
+
+export default function Results() {
+  const pdfRef   = useRef(null);
+  const chartRef = useRef(null);
+  const [chartPng, setChartPng] = useState(null);
+  const { inputs = {}, results = {} } = useAssessment();
+    
+  // downloadig the pdf file
+  const downloadPDF = async () => {
+  const html2pdf = (await import("html2pdf.js")).default;
+  const html2canvas = (await import("html2canvas")).default;
+
+  const root = pdfRef.current;
+  if (!root) return;
+
+  // let layout settle + nudge resize so chart has final size
+  await new Promise((r) => setTimeout(r, 250));
+  window.dispatchEvent(new Event("resize"));
+  await new Promise((r) => setTimeout(r, 120));
+
+  // 1) rasterize the chart to PNG and swap it in
+  if (chartRef.current) {
+    const canvas = await html2canvas(chartRef.current, {
+      backgroundColor: "#ffffff",
+      scale: 2,
+      useCORS: true,
+      scrollY: -window.scrollY,
+    });
+    setChartPng(canvas.toDataURL("image/png"));
+    await new Promise((r) => setTimeout(r, 50)); // let React render the <img>
+  }
+
+  // 2) export the whole report (now containing the PNG, not the live SVG)
+  const opt = {
+    margin: [12, 12, 20, 12],
+    filename: `RTRWH_${inputs.city || "report"}.pdf`,
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+      // By setting a fixed window-width, we ensure the PDF output is consistent
+      // and not dependent on the user's screen size. This prevents the chart
+      // from appearing too small when exported on a wide screen.
+      windowWidth: 800,
+      scrollY: -window.scrollY,
+    },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ["css", "avoid-all"] },
   };
 
+  await html2pdf().set(opt).from(root).save();
+
+  // 3) restore live chart after saving
+  setChartPng(null);
+};
+
+
+ 
+  const months = results.months ?? [];
+  const maxMonth = useMemo(
+    () => (months.length ? Math.max(...months) : 0),
+    [months]
+  );
+  const monthLabels = [
+    "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
+  ];
+  
+  
+
+
   return (
-    <div className="py-6">
-      <div id="report" className="bg-white p-4 rounded-lg">
-        <h2 className="text-xl font-bold mb-2">Assessment Result</h2>
-        <p className="text-gray-600 text-sm mb-4">
-          City: {inputs.city} • Rainfall: {inputs.rainfallMm} mm • Roof: {inputs.roofAreaM2} m²
+    <>
+      
+      <div ref={pdfRef} id="rtrwh-report" className="space-y-8">
+        <div className="py-6 space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+            <div>
+              <h1 className="text-2xl font-bold">Your Rainwater Assessment</h1>
+          <p className="text-sm text-gray-500">
+            Location: <span className="font-medium">{inputs.city ?? "-"}</span> · Roof:{" "}
+            <span className="font-medium">{fmtInt(inputs.roofAreaM2)} m²</span> · Roof type:{" "}
+            <span className="font-medium uppercase">{inputs.roofType ?? "-"}</span> · Rainfall:{" "}
+            <span className="font-medium">{fmtInt(inputs.rainfallMm)} mm/yr</span> · Dwellers:{" "}
+            <span className="font-medium">{fmtInt(inputs.dwellers)}</span>
+          </p>
+        </div>
+        <a
+          href="/assess"
+          className="inline-flex items-center justify-center h-10 px-4 rounded-lg bg-indigo-600 text-white text-sm font-medium"
+        >
+          Re-assess
+        </a>
+      </div>
+      <section className="card p-6 avoid-break">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <KPI label="Annual Harvest" value={`${fmtInt(results.annual)} L`} hint="Rainfall × Roof × Coefficient" />
+        <KPI label="Annual Demand" value={`${fmtInt(results.demand)} L`} hint="135 L/day × dwellers × 365" />
+        <KPI label="Self-Sufficiency" value={`${results.selfSuff ?? "-"} %`} />
+        <KPI label="Tank Size (Ripple)" value={`${fmtInt(results.tankSize)} L`} hint="Sequent-peak monthly balance" />
+        <KPI label="Recharge Potential" value={`${fmtInt(results.recharge)} L`} hint="Harvest − Stored" />
+        <KPI label="Recharge Pit Volume" value={`${results.pitVol ?? "-"} m³`} hint="Annual ÷ 1000 (info only)" />
+        <KPI label="Estimated Saving" value={fmtInr(results.saving)} />
+        <KPI label="Payback (Years)" value={results.payback ?? "-"} />
+        <KPI label="Recommended Structure" value={results.structure ?? "-"} />
+        <KPI label="Structure Size" value={results.sizeText ?? "-"} />
+        <KPI label="Estimated Cost" value={fmtInr(results.cost)} />
+      </div>
+    {/* KPIs you already render */}
+    </section>
+    
+      
+      <section className="p-4 rounded-2xl border border-gray-200 bg-white shadow-sm card p-6 avoid-break, overflow-visible">
+       <h2 className="text-lg font-semibold">Monthly Harvest (Liters)</h2>
+        <p className="text-xs text-gray-500 mb-4">
+          Based on monthly rainfall normals for <span className="font-medium">{inputs.city ?? "-"}</span>.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          <KPI label="Annual Harvest" value={`${results.annual.toLocaleString()} L`} />
-          <KPI label="Structure" value={results.structure} />
-          <KPI label="Structure Size" value={results.sizeText} />
-          <KPI label="Estimated Cost" value={`₹${results.cost.toLocaleString()}`} />
-          <KPI label="Payback" value={`${results.payback} years`} />
+        <div
+          ref={chartRef}
+          // By giving the container a fixed size, we ensure html2canvas
+          // captures only the chart, not the full width of the page. This
+          // prevents the chart from being scaled down when the resulting
+          // PNG is displayed in a fixed-size <img> tag.
+          style={{ width: '640px', height: '320px', margin: '0 auto' }}>
+          {chartPng ? (
+            <img
+              src={chartPng}
+              alt="Monthly harvest chart"
+              style={{ width: "640px", height: "320px" }}
+            />
+          ) : (
+            <ErrorBoundary>
+              <ChartMonthly months={months} />
+            </ErrorBoundary>
+         ) }
         </div>
+      </section>
 
-        <h3 className="mt-6 font-semibold">Monthly Harvest</h3>
-        <ChartMonthly data={results.months} />
 
-        <div className="text-xs text-gray-500 mt-4">
-          <p>Estimates are indicative. Consult local regulations and a qualified engineer.</p>
-        </div>
+      <section className="p-4 rounded-2xl border border-gray-200 bg-white shadow-sm card p-6 avoid-break">
+        <h3 className="text-base font-semibold">Assumptions & Notes</h3>
+        <ul className="mt-2 text-sm text-gray-600 list-disc pl-5 space-y-1">
+          <li>135 L/day per person (CPHEEO norm).</li>
+          <li>First-flush = 3 mm; conveyance loss = 5%.</li>
+          <li>Tank sizing via Ripple (sequent-peak) using monthly rainfall normals.</li>
+          <li>Recharge sized for a design event with void ratio 0.35.</li>
+        </ul>
+      </section>
+    </div>
+      </div>
+      {/* Download button (kept outside the PDF ref) */}
+      <div className="flex justify-end no-print">
+        <button
+          onClick={downloadPDF}
+          className="btn bg-indigo-600 text-white hover:bg-indigo-700"
+        >
+          Download PDF
+        </button>
       </div>
 
-      <button onClick={download} className="mt-4 bg-indigo-600 text-white px-4 py-2 rounded">Download PDF</button>
-    </div>
+    </>
   );
 }
