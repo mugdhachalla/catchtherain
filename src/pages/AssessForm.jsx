@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import rainfall from "../data/rainfall.json";
 import { useAssessment } from "../store/useAssessment";
+import {Navbar} from "../components/Navbar";
 
 
 // Haversine (better than simple sqrt for distance)

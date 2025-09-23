@@ -1,10 +1,7 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 
-/* Your small design system */
+/* Your small design system 
 @layer components {
   .card {
     @apply bg-white rounded-2xl border border-slate-200 shadow-[0_4px_20px_rgba(2,6,23,0.06)];
@@ -22,5 +19,6 @@
   .no-print { @apply print:hidden; }
 }
 
-/* PDF helpers */
+s
 .avoid-break { break-inside: avoid; page-break-inside: avoid; }
+*/
