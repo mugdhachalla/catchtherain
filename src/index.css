@@ -1,4 +1,8 @@
 @import "tailwindcss";
+.pagebreak {
+  page-break-before: always;
+  break-before: page;
+}
 
 
 /* Your small design system 
