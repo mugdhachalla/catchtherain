@@ -6,6 +6,7 @@ import ErrorBoundary from "../components/ErrorBoundary";
 
 
 
+
 const fmtInt = (n) =>
   typeof n === "number" && !isNaN(n) ? n.toLocaleString() : "-";
 const fmtInr = (n) =>
@@ -13,11 +14,11 @@ const fmtInr = (n) =>
 
 function KPI({ label, value, hint }) {
   return (
-    <div className="p-4 rounded-2xl border border-gray-200 bg-white shadow-sm">
-      <div className="text-xs text-gray-500">{label}</div>
-      <div className="text-xl font-semibold mt-1">{value}</div>
+    <div className="bg-slate-50 p-4 rounded-xl text-center transition-transform transform hover:scale-105">
+      <p className="text-sm font-medium text-slate-600">{label}</p>
+      <p className="text-2xl font-bold text-slate-900 mt-1">{value}</p>
       {hint ? (
-        <div className="text-[11px] text-gray-400 mt-1">{hint}</div>
+        <p className="text-xs text-slate-400 mt-1">{hint}</p>
       ) : null}
     </div>
   );
@@ -27,8 +28,6 @@ export default function Results() {
   const pdfRef   = useRef(null);
   const chartRef = useRef(null);
   const [chartPng, setChartPng] = useState(null);
-  const [isReportVisible, setIsReportVisible] = useState(false);
-  const [shouldOpenPdf, setShouldOpenPdf] = useState(false);
   const { inputs = {}, results = {} } = useAssessment();
     
   const generatePdf = async (outputType = 'save') => {
@@ -90,13 +89,6 @@ export default function Results() {
     }
   };
 
-  useEffect(() => {
-    if (isReportVisible && shouldOpenPdf) {
-      generatePdf('dataurlnewwindow');
-      setShouldOpenPdf(false); // Reset the trigger
-    }
-  }, [isReportVisible, shouldOpenPdf]);
-
   const months = results.months ?? [];
   const maxMonth = useMemo(
     () => (months.length ? Math.max(...months) : 0),
@@ -107,10 +99,10 @@ export default function Results() {
   ];
   
   
-  if (!isReportVisible) {
-    return (
-      <div className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 min-h-screen">
-        <div className="max-w-3xl mx-auto">
+  return (
+    <>
+      <div className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-100 min-h-screen">
+        <div className="max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Assessment Summary</h1>
@@ -121,41 +113,48 @@ export default function Results() {
             </div>
             <a
               href="/assess"
-              className="inline-flex items-center justify-center h-10 px-5 rounded-lg bg-white text-indigo-600 text-sm font-medium border border-indigo-200 hover:bg-indigo-50 transition-colors shadow-sm"
+              className="inline-flex items-center justify-center h-10 px-5 rounded-lg bg-white text-slate-700 text-sm font-medium border border-slate-200 hover:bg-slate-50 transition-colors shadow-sm"
             >
               Re-assess
             </a>
           </div>
 
-          <div className="bg-white shadow-lg rounded-2xl p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Key Results</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="bg-white shadow-xl rounded-2xl p-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Your Potential</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <KPI label="Annual Harvest" value={`${fmtInt(results.annual)} L`} />
-              <KPI label="Estimated Cost" value={fmtInr(results.cost)} />
-              <KPI label="Estimated Saving" value={fmtInr(results.saving)} />
+              <KPI label="Total Cost" value={fmtInr(results.cost)} />
+              <KPI label="Total Savings" value={fmtInr(results.saving)} />
               <KPI label="Recommended Structure" value={results.structure ?? "-"} />
+            </div>
+            <div className="mt-8 flex justify-center">
+              <button
+                onClick={() => generatePdf('dataurlnewwindow')}
+                className="inline-flex items-center justify-center h-11 px-8 rounded-lg bg-cyan-600 text-white text-base font-semibold hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 shadow-lg"
+              >
+                View Report as PDF
+              </button>
             </div>
           </div>
 
-          <div className="mt-8 flex justify-end">
-            <button
-              onClick={() => {
-                setIsReportVisible(true);
-                setShouldOpenPdf(true);
-              }}
-              className="inline-flex items-center justify-center h-11 px-8 rounded-lg bg-indigo-600 text-white text-base font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg"
-            >
-              View Report as PDF
-            </button>
-          </div>
+          <section className="mt-8 bg-white shadow-xl rounded-2xl p-8">
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Assumptions & Notes</h3>
+            <ul className="mt-3 text-sm text-gray-600 list-disc pl-5 space-y-2">
+              <li>135 L/day per person (CPHEEO norm).</li>
+              <li>First-flush = 3 mm; conveyance loss = 5%.</li>
+              <li>Tank sizing via Ripple (sequent-peak) using monthly rainfall normals.</li>
+              <li>Recharge sized for a design event with void ratio 0.35.</li>
+            </ul>
+          </section>
         </div>
       </div>
-    );
-  }
-  return (
-    <>
-      
-      <div ref={pdfRef} id="rtrwh-report" className="space-y-8">
+
+      {/* Hidden Full Report for PDF Generation */}
+      <div
+        style={{ position: 'absolute', left: '-9999px', top: 0, width: '800px' }}
+        aria-hidden="true"
+      >
+        <div ref={pdfRef} id="rtrwh-report" className="space-y-8 p-6 bg-white">
         <div className="py-6 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
             <div>
@@ -231,15 +230,7 @@ export default function Results() {
         </ul>
       </section>
     </div>
-      </div>
-      {/* Download button (kept outside the PDF ref) */}
-      <div className="flex justify-end no-print">
-        <button
-          onClick={() => generatePdf('save')}
-          className="btn bg-indigo-600 text-white hover:bg-indigo-700"
-        >
-          Download PDF
-        </button>
+        </div>
       </div>
 
     </>
