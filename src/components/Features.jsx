@@ -1,5 +1,6 @@
 import { Calculator, MapPin, IndianRupee, BookOpen } from "lucide-react"
 import { Card, CardContent } from "../components/ui/Card"
+import { Link } from "react-router-dom"
 
 const Features = () => {
   const features = [
@@ -83,7 +84,9 @@ const Features = () => {
         <div className="text-center mt-16">
           <div className="inline-flex items-center space-x-2 text-primary font-medium">
             <span>Ready to start conserving water?</span>
-            <Calculator className="h-5 w-5" />
+            <Link to="/assess">
+              <Calculator className="h-5 w-5" />
+            </Link>
           </div>
         </div>
       </div>

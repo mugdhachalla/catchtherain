@@ -20,7 +20,7 @@ export function Navbar() {
      ${pathname === path ? "text-blue-600 bg-blue-50" : "text-gray-600 hover:text-blue-600 hover:bg-gray-100"}`;
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur border-b">
+    <nav className="fixed top-0 w-full z-50 bg-sky-50 backdrop-blur border-sky-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* bar */}
         <div className="flex justify-between items-center h-16">

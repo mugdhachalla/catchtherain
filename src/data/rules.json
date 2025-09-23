@@ -1,32 +1,88 @@
 {
-  "RTRWH_Legal_Rules": [
+  "rules": [
     {
-      "City/State": "Tamil Nadu",
-      "Rule": "RWH mandatory in all buildings, rural and urban; included in CMDA Development Control Rules Section 25A"
+      "City": "Chennai",
+      "Rule": "RWH mandatory in all buildings, rural and urban, included in CMDA Development Control Rules Section 25A"
     },
     {
-      "City/State": "Delhi",
+      "City": "Coimbatore",
+      "Rule": "RWH mandatory in all buildings, rural and urban, included in CMDA Development Control Rules Section 25A"
+    },
+    {
+      "City": "Madurai",
+      "Rule": "RWH mandatory in all buildings, rural and urban, included in CMDA Development Control Rules Section 25A"
+    },
+    {
+      "City": "Delhi",
       "Rule": "RWH mandatory for plots ≥100 m²; plots ≥500 m² must install functional RWH"
     },
     {
-      "City/State": "Bengaluru (Karnataka)",
-      "Rule": "RWH mandatory for sites ≥2400 sq ft and buildings with ≥50 units; rebates available under BWSSB Rules"
+      "City": "Noida",
+      "Rule": "RWH mandatory for plots ≥100 m², plots ≥500 m² must install functional RWH"
     },
     {
-      "City/State": "Telangana (Hyderabad)",
-      "Rule": "RWH mandatory for new buildings ≥200 m²; required in new layouts/buildings under Telangana Municipalities Act"
+      "City": "Gurgaon",
+      "Rule": "RWH mandatory for plots ≥100 m², plots ≥500 m² must install functional RWH"
     },
     {
-      "City/State": "Andhra Pradesh",
+      "City": "Bengaluru",
+      "Rule": "RWH mandatory for sites ≥2400 sq ft and buildings with ≥50 units, rebates available under BWSSB Rules"
+    },
+    {
+      "City": "Mysuru",
+      "Rule": "RWH mandatory for sites ≥2400 sq ft and buildings with ≥50 units, rebates available under BWSSB Rules"
+    },
+    {
+      "City": "Hubballi",
+      "Rule": "RWH mandatory for sites ≥2400 sq ft and buildings with ≥50 units, rebates available under BWSSB Rules"
+    },
+    {
+      "City": "Hyderabad",
+      "Rule": "RWH mandatory for new buildings ≥200 m², required in new layouts/buildings under Telangana Municipalities Act"
+    },
+    {
+      "City": "Warangal",
+      "Rule": "RWH mandatory for new buildings ≥200 m², required in new layouts/buildings under Telangana Municipalities Act"
+    },
+    {
+      "City": "Nizamabad",
+      "Rule": "RWH mandatory for new buildings ≥200 m², required in new layouts/buildings under Telangana Municipalities Act"
+    },
+    {
+      "City": "Vijayawada",
       "Rule": "RWH mandatory for plots ≥300 m² in municipal corporations and municipalities"
     },
     {
-      "City/State": "Maharashtra (Mumbai & Pune)",
-      "Rule": "RWH mandatory for plots ≥1000 m²; required in new constructions"
+      "City": "Visakhapatnam",
+      "Rule": "RWH mandatory for plots ≥300 m² in municipal corporations and municipalities"
     },
     {
-      "City/State": "Rajasthan",
-      "Rule": "RWH mandatory for new buildings on plots ≥300 m²; compulsory in Jaipur"
+      "City": "Guntur",
+      "Rule": "RWH mandatory for plots ≥300 m² in municipal corporations and municipalities"
+    },
+    {
+      "City": "Mumbai",
+      "Rule": "RWH mandatory for plots ≥1000 m², required in new constructions"
+    },
+    {
+      "City": "Pune",
+      "Rule": "RWH mandatory for plots ≥1000 m², required in new constructions"
+    },
+    {
+      "City": "Nagpur",
+      "Rule": "RWH mandatory for plots ≥1000 m², required in new constructions"
+    },
+    {
+      "City": "Jaipur",
+      "Rule": "RWH mandatory for new buildings on plots ≥300 m², compulsory in Jaipur"
+    },
+    {
+      "City": "Jodhpur",
+      "Rule": "RWH mandatory for new buildings on plots ≥300 m²"
+    },
+    {
+      "City": "Udaipur",
+      "Rule": "RWH mandatory for new buildings on plots ≥300 m²"
     }
   ]
 }

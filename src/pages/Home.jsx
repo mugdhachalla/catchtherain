@@ -3,7 +3,7 @@ import Features from '../components/Features';
 import Hero from '../components/Hero';
 import { Button } from '../components/ui/Button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Droplets, Users, Award } from 'lucide-react';
+import { ArrowRight, Droplets, Users,Globe} from 'lucide-react';
 
 const Home = () => {
   return (
@@ -28,7 +28,7 @@ const Home = () => {
         <div className="inline-flex p-4 bg-sky-100 rounded-2xl mb-4">
           <Droplets className="h-12 w-12 text-cyan-950" />
         </div>
-        <h3 className="text-2xl font-semibold text-slate-900 mb-2">50 Billion Litres</h3>
+        <h3 className="text-2xl font-semibold text-slate-900 mb-2">320 BCM</h3>
         <p className="text-slate-600">Water harvested annually across India</p>
       </div>
 
@@ -42,10 +42,10 @@ const Home = () => {
 
       <div className="text-center">
         <div className="inline-flex p-4 bg-sky-100 rounded-2xl mb-4">
-          <Award className="h-12 w-12 text-cyan-950" />
+          <Globe className="h-12 w-12 text-cyan-950" />
         </div>
-        <h3 className="text-2xl font-semibold text-slate-900 mb-2">Award Winning</h3>
-        <p className="text-slate-600">Recognized by environmental agencies</p>
+        <h3 className="text-2xl font-semibold text-slate-900 mb-2">SDG-6</h3>
+        <p className="text-slate-600">Ensuring access to clean water</p>
       </div>
     </div>
 
