@@ -1,5 +1,5 @@
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import { useAssessment } from "../store/useAssessment";
 import ChartMonthly from "../components/ChartMonthly";
 import ErrorBoundary from "../components/ErrorBoundary";
@@ -27,33 +27,11 @@ export default function Results() {
   const pdfRef   = useRef(null);
   const chartRef = useRef(null);
   const [chartPng, setChartPng] = useState(null);
+  const [isReportVisible, setIsReportVisible] = useState(false);
+  const [shouldOpenPdf, setShouldOpenPdf] = useState(false);
   const { inputs = {}, results = {} } = useAssessment();
     
-  // downloadig the pdf file
-  const downloadPDF = async () => {
-  const html2pdf = (await import("html2pdf.js")).default;
-  const html2canvas = (await import("html2canvas")).default;
-
-  const root = pdfRef.current;
-  if (!root) return;
-
-  // let layout settle + nudge resize so chart has final size
-  await new Promise((r) => setTimeout(r, 250));
-  window.dispatchEvent(new Event("resize"));
-  await new Promise((r) => setTimeout(r, 120));
-
-  // 1) rasterize the chart to PNG and swap it in
-  if (chartRef.current) {
-    const canvas = await html2canvas(chartRef.current, {
-      backgroundColor: "#ffffff",
-      scale: 2,
-      useCORS: true,
-      scrollY: -window.scrollY,
-    });
-    setChartPng(canvas.toDataURL("image/png"));
-    await new Promise((r) => setTimeout(r, 50)); // let React render the <img>
-  }
-
+  const generatePdf = async (outputType = 'save') => {
   // 2) export the whole report (now containing the PNG, not the live SVG)
   const opt = {
     margin: [12, 12, 20, 12],
@@ -68,19 +46,57 @@ export default function Results() {
       // from appearing too small when exported on a wide screen.
       windowWidth: 800,
       scrollY: -window.scrollY,
+      // html2canvas does not inherit print styles, so we need to tell it
+      // explicitly to ignore elements with the `no-print` class.
+      ignoreElements: (element) =>
+        element.classList.contains("no-print"),
     },
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
     pagebreak: { mode: ["css", "avoid-all"] },
   };
+    const html2pdf = (await import("html2pdf.js")).default;
+    const html2canvas = (await import("html2canvas")).default;
 
-  await html2pdf().set(opt).from(root).save();
+    const root = pdfRef.current;
+    if (!root) return;
 
-  // 3) restore live chart after saving
-  setChartPng(null);
-};
+    // let layout settle + nudge resize so chart has final size
+    await new Promise((r) => setTimeout(r, 250));
+    window.dispatchEvent(new Event("resize"));
+    await new Promise((r) => setTimeout(r, 120));
 
+    // 1) rasterize the chart to PNG and swap it in
+    if (chartRef.current) {
+      const canvas = await html2canvas(chartRef.current, {
+        backgroundColor: "#ffffff",
+        scale: 2,
+        useCORS: true,
+        scrollY: -window.scrollY,
+      });
+      setChartPng(canvas.toDataURL("image/png"));
+      await new Promise((r) => setTimeout(r, 50)); // let React render the <img>
+    }
 
- 
+    const worker = html2pdf().set(opt).from(root);
+
+    if (outputType === 'dataurlnewwindow') {
+      worker.outputPdf('dataurlnewwindow');
+      // 3) restore live chart after a delay
+      setTimeout(() => setChartPng(null), 1000);
+    } else {
+      await worker.save();
+      // 3) restore live chart after saving
+      setChartPng(null);
+    }
+  };
+
+  useEffect(() => {
+    if (isReportVisible && shouldOpenPdf) {
+      generatePdf('dataurlnewwindow');
+      setShouldOpenPdf(false); // Reset the trigger
+    }
+  }, [isReportVisible, shouldOpenPdf]);
+
   const months = results.months ?? [];
   const maxMonth = useMemo(
     () => (months.length ? Math.max(...months) : 0),
@@ -91,8 +107,51 @@ export default function Results() {
   ];
   
   
+  if (!isReportVisible) {
+    return (
+      <div className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 min-h-screen">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Assessment Summary</h1>
+              <p className="text-sm text-gray-500 mt-2">
+                Location: <span className="font-medium text-gray-800">{inputs.city ?? "-"}</span> · Roof:{" "}
+                <span className="font-medium text-gray-800">{fmtInt(inputs.roofAreaM2)} m²</span>
+              </p>
+            </div>
+            <a
+              href="/assess"
+              className="inline-flex items-center justify-center h-10 px-5 rounded-lg bg-white text-indigo-600 text-sm font-medium border border-indigo-200 hover:bg-indigo-50 transition-colors shadow-sm"
+            >
+              Re-assess
+            </a>
+          </div>
 
+          <div className="bg-white shadow-lg rounded-2xl p-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Key Results</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <KPI label="Annual Harvest" value={`${fmtInt(results.annual)} L`} />
+              <KPI label="Estimated Cost" value={fmtInr(results.cost)} />
+              <KPI label="Estimated Saving" value={fmtInr(results.saving)} />
+              <KPI label="Recommended Structure" value={results.structure ?? "-"} />
+            </div>
+          </div>
 
+          <div className="mt-8 flex justify-end">
+            <button
+              onClick={() => {
+                setIsReportVisible(true);
+                setShouldOpenPdf(true);
+              }}
+              className="inline-flex items-center justify-center h-11 px-8 rounded-lg bg-indigo-600 text-white text-base font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg"
+            >
+              View Report as PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       
@@ -111,7 +170,7 @@ export default function Results() {
         </div>
         <a
           href="/assess"
-          className="inline-flex items-center justify-center h-10 px-4 rounded-lg bg-indigo-600 text-white text-sm font-medium"
+          className="no-print inline-flex items-center justify-center h-10 px-4 rounded-lg bg-indigo-600 text-white text-sm font-medium"
         >
           Re-assess
         </a>
@@ -176,7 +235,7 @@ export default function Results() {
       {/* Download button (kept outside the PDF ref) */}
       <div className="flex justify-end no-print">
         <button
-          onClick={downloadPDF}
+          onClick={() => generatePdf('save')}
           className="btn bg-indigo-600 text-white hover:bg-indigo-700"
         >
           Download PDF
