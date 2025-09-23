@@ -4,7 +4,7 @@ import { ArrowRight, Droplets, Leaf, Calculator } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen px-6 py-16 flex flex-wrap items-center justify-center bg-gradient-to-r from-sky-200 to-sky-600 overflow-hidden">
+    <section className="relative w-full min-h-screen px-6 py-16 flex flex-wrap items-center justify-center bg-gradient-to-r from-sky-200 to-sky-700 overflow-hidden">
       {/* Overlay with real colors + transparency */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/90" />
       <div className="absolute top-20 left-10 opacity-20">
@@ -30,16 +30,16 @@ export default function Hero() {
 
         <div className="flex flex-wrap justify-center gap-8 mb-12 text-white">
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold">50%</div>
-            <div className="text-cyan-950">Water Savings</div>
+            <div className="text-3xl md:text-4xl font-bold">45%</div>
+            <div className="text-cyan-950">Water Bill Savings</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold">1000+</div>
-            <div className="text-cyan-950">Cities Covered</div>
+            <div className="text-3xl md:text-4xl font-bold">4000 BCM</div>
+            <div className="text-cyan-950">Annual Rainfall</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold">₹50K</div>
-            <div className="text-cyan-950">Avg. Annual Savings</div>
+            <div className="text-3xl md:text-4xl font-bold">50K Litres</div>
+            <div className="text-cyan-950 text-wrap">RWH potential</div>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ export default function Hero() {
             </Button>
           </Link>
 
-          <Link to="/dashboard">
+          <Link to="/guidelines">
           <Button
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow"
           >
@@ -63,14 +63,14 @@ export default function Hero() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/20 text-white/80">
-          <p className="text-sm mb-4">Trusted by environmental agencies</p>
-          <div className="flex justify-center items-center gap-8">
+          <p className="text-sm mb-4 text-wrap">The figures for rainfall, rooftop rainwater harvesting, and water bill savings are approximate. A 100 sq. meter roof can harvest about 45,000–55,000 liters annually, meeting 40–60% of a family of four’s water needs, with reported bill reductions of 30–60%. Actual results may vary depending on local conditions and system design.</p>
+          {/*<div className="flex justify-center items-center gap-8">
             <span className="font-semibold">Ministry of Water Resources</span>
             <span className="w-px h-4 bg-white/30" />
             <span className="font-semibold">CGWB</span>
             <span className="w-px h-4 bg-white/30" />
             <span className="font-semibold">State Water Boards</span>
-          </div>
+          </div>*/}
         </div>
       </div>
     </section>

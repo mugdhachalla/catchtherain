@@ -1,8 +1,7 @@
 import React, { useMemo, useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
-
-
+import {Navbar} from "../components/Navbar";
 import { useAssessment } from "../store/useAssessment";
 import ChartMonthly from "../components/ChartMonthly";
 import ErrorBoundary from "../components/ErrorBoundary";
@@ -104,7 +103,8 @@ export default function Results() {
   
   return (
     <>
-      <div className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-100 min-h-screen">
+      <div className="py-12 bg-slate-100 min-h-screen">
+        <Navbar />
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
             <div>

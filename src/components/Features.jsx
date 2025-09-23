@@ -1,5 +1,6 @@
 import { Calculator, MapPin, IndianRupee, BookOpen } from "lucide-react"
 import { Card, CardContent } from "../components/ui/Card"
+import { Link } from "react-router-dom"
 
 const Features = () => {
   const features = [
@@ -39,7 +40,7 @@ const Features = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Why Choose Our Calculator?
+            Ready to get Started?
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Make informed decisions about rainwater harvesting with our
@@ -80,10 +81,15 @@ const Features = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center space-x-2 text-primary font-medium">
-            <span>Ready to start conserving water?</span>
-            <Calculator className="h-5 w-5" />
+        <div className="text-center text-white mt-16">
+          <div>
+            <Link
+              to="/assess"
+              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md inline-flex items-center space-x-2 text-white font-medium transition-colors"
+            >
+              <span>Ready to start conserving water?</span>
+              <Calculator className="h-5 w-5" />
+            </Link>
           </div>
         </div>
       </div>

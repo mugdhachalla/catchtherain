@@ -72,7 +72,7 @@ const Dashboard = () => {
           {/* Header */}
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              RWH Dashboard
+              Rainwater Harvesting Potential Dashboard
             </h1>
             <p className="text-xl text-slate-600 max-w-3xl">
               Overview of rainwater harvesting potential and implementation across
@@ -209,7 +209,7 @@ const Dashboard = () => {
 
           {/* Impact Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-blue-600 to-indigo-600 text-white">
+            <Card className="pt-4 bg-gradient-to-br from-blue-600 to-indigo-600 text-white">
               <CardContent className="p-6 text-center">
                 <Droplets className="h-12 w-12 mx-auto mb-4 opacity-90" />
                 <h3 className="text-2xl font-bold mb-2">2.5 Billion L</h3>
@@ -220,7 +220,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-emerald-500 to-teal-500 text-white">
+            <Card className="pt-4 bg-gradient-to-br from-emerald-500 to-teal-500 text-white">
               <CardContent className="p-6 text-center">
                 <Users className="h-12 w-12 mx-auto mb-4 opacity-90" />
                 <h3 className="text-2xl font-bold mb-2">50,000+</h3>
@@ -231,7 +231,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white border border-slate-200 text-slate-900">
+            <Card className="pt-4 bg-white border border-slate-200 text-slate-900">
               <CardContent className="p-6 text-center">
                 <Leaf className="h-12 w-12 mx-auto mb-4 text-emerald-600" />
                 <h3 className="text-2xl font-bold mb-2 text-emerald-700">

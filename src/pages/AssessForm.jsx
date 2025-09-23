@@ -1,10 +1,13 @@
 
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import rainfall from "../data/rainfall.json";
 import { useAssessment } from "../store/useAssessment";
 import {Navbar} from "../components/Navbar";
+import rulesData from "../data/rules.json";
+import {Info} from "lucide-react";
 
 
 // Haversine (better than simple sqrt for distance)
@@ -22,6 +25,8 @@ function haversine(lat1, lon1, lat2, lon2) {
 export default function AssessForm() {
   const navigate = useNavigate();
   const { inputs, setInput, compute } = useAssessment();
+  const [currcity, setCity]=useState(null);
+  const [rules, setRule]=useState(null);
 
   const { register, handleSubmit, watch, setValue } = useForm({
     defaultValues: {
@@ -54,6 +59,10 @@ export default function AssessForm() {
         }
 
         if (nearest) {
+          setCity(nearest);
+          const found = rulesData.rules.find(r => r["City"] === nearest);
+          setRule(found ? found.Rule : "");
+          
           const mm = rainfall[nearest].rainfall_mm;
           // Update BOTH: form field + zustand store
           setValue("city", nearest, { shouldDirty: true, shouldValidate: true });
@@ -134,6 +143,7 @@ export default function AssessForm() {
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <Navbar />
       <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
         <div className="grid md:grid-cols-2">
           <div className="p-8">
@@ -221,10 +231,18 @@ export default function AssessForm() {
                 </div>
               </section>
 
-              <button type="submit" className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+              <button type="submit" className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
                 Calculate
               </button>
             </form>
+            {rules && rules.trim() !== "" && (
+            <div className="pt-6">
+              <p className="py-4 px-4 flex items-center gap-3 bg-sky-100 rounded-md">
+                <Info className="h-6 w-6 text-sky-600 flex-shrink-0" />
+                <span className="text-sky-900">{rules}</span>
+              </p>
+            </div>
+            )}
           </div>
           <div className="hidden md:block bg-indigo-600 p-8">
             <div className="flex flex-col justify-center h-full text-white">
