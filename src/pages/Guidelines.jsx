@@ -201,6 +201,86 @@ const Guidelines = () => {
               ))}
             </div>
           </div>
+          {/*Information */}
+          
+          <div className=" py-10 px-6">
+            <h1 className="text-3xl font-bold mb-6 text-slate-900">Glossary</h1>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card className="pt-4 bg-white border border-slate-200">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                    <span>Artificial Recharge</span>
+                  </h3>
+                  <p className="text-slate-800">
+                    Human-made methods of increasing the amount of water that enters underground aquifers (e.g., through recharge pits, trenches, or shafts).
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="pt-4 bg-white border border-slate-200">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                    <span>Central Ground Water Board (CGWB)</span>
+                  </h3>
+                  <p className="text-slate-800">
+                    A Government of India organization under the Ministry of Jal Shakti responsible for the management, assessment, and regulation of groundwater resources.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="pt-4 bg-white border border-slate-200">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                    <span>Recharge Pit</span>
+                  </h3>
+                  <p className="text-slate-800">
+                    A small dug-out pit filled with stones/gravel that allows rainwater to percolate into the ground.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="pt-4 bg-white border border-slate-200">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                    <span>Recharge Trench</span>
+                  </h3>
+                  <p className="text-slate-800">
+                    A shallow, linear excavation (like a channel) used to collect and infiltrate rainwater into the soil.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="pt-4 bg-white border border-slate-200">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                    <span>Roof Type</span>
+                  </h3>
+                  <p className="text-slate-800">
+                    The material and slope of a roof affect how much rainwater can be collected. 
+                    RCC (concrete) and metal roofs have higher efficiency (80–90%), while tile or 
+                    thatched roofs may lose more water due to absorption and evaporation.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="pt-6 pb-4 bg-white border border-slate-200">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                    <span>Aquifer</span>
+                  </h3>
+
+                  <div className="space-y-3">
+                    <p className="text-slate-800 text-wrap">
+                      An underground layer of rock, sand, or gravel that stores and transmits
+                      water. Aquifers act like natural reservoirs, supplying groundwater for
+                      wells, borewells, irrigation, and drinking water.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+
 
           {/* Best Practices */}
           <Card className="bg-gradient-to-br from-sky-500 to-blue-600 text-white mb-16">

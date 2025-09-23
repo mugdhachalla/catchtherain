@@ -72,7 +72,7 @@ const Dashboard = () => {
           {/* Header */}
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              RWH Dashboard
+              Rainwater Harvesting Potential Dashboard
             </h1>
             <p className="text-xl text-slate-600 max-w-3xl">
               Overview of rainwater harvesting potential and implementation across

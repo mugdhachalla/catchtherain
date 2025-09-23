@@ -4,7 +4,7 @@ import { ArrowRight, Droplets, Leaf, Calculator } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen px-6 py-16 flex flex-wrap items-center justify-center bg-gradient-to-r from-sky-200 to-sky-600 overflow-hidden">
+    <section className="relative w-full min-h-screen px-6 py-16 flex flex-wrap items-center justify-center bg-gradient-to-r from-sky-200 to-sky-700 overflow-hidden">
       {/* Overlay with real colors + transparency */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/90" />
       <div className="absolute top-20 left-10 opacity-20">
