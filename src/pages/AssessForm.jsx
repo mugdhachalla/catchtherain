@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import rainfall from "../data/rainfall.json";
 import { useAssessment } from "../store/useAssessment";
 
+
 // Haversine (better than simple sqrt for distance)
 function haversine(lat1, lon1, lat2, lon2) {
   const toRad = d => (d * Math.PI) / 180;
@@ -96,61 +97,155 @@ export default function AssessForm() {
     navigate("/results"); // no reload, preserves store
   };
 
+  const Benefit = ({ icon, title, children }) => (
+    <div className="bg-white p-5 rounded-xl shadow-lg">
+      <div className="flex items-start space-x-4">
+        <div className="flex-shrink-0">
+          <div className="bg-indigo-100 text-indigo-600 p-3 rounded-lg">
+            {icon}
+          </div>
+        </div>
+        <div>
+          <h4 className="text-lg font-semibold text-gray-800">{title}</h4>
+          <p className="mt-1 text-gray-600 text-sm">{children}</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  const iconProps = {
+    className: "h-6 w-6",
+    strokeWidth: "1.5",
+  };
+
+  const icons = {
+    dollar: <svg {...iconProps} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.826-1.106-2.236 0-3.062a2.333 2.333 0 0 1 3.464 0l.879.659" />
+    </svg>,
+    leaf: <svg {...iconProps} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 18.657A8 8 0 0 1 6.343 7.343S7 9 9 10c0-2 .5-5 2.986-7.014A8.003 8.003 0 0 1 17.657 18.657Z" />
+    </svg>,
+    layers: <svg {...iconProps} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125v-1.5c0-.621.504-1.125 1.125-1.125h17.25c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h17.25" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="m3.375 14.25 8.625-8.625 8.625 8.625m-17.25 0v-2.625c0-.621.504-1.125 1.125-1.125h15c.621 0 1.125.504 1.125 1.125v2.625" />
+    </svg>,
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-4 py-6">
-      <div>
-        <label className="block text-sm">City</label>
-        <select {...register("city")} className="input">
-          {Object.keys(rainfall).map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
-        </select>
-        <p className="text-xs text-gray-500 mt-1">
-          Default rainfall: {rainfall[city]?.rainfall_mm ?? "-"} mm (editable)
-        </p>
-      </div>
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="grid md:grid-cols-2">
+          <div className="p-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Rainwater Harvesting Calculator
+            </h2>
+            <p className="text-gray-600 mb-8">
+              Fill in the details below to estimate your potential savings.
+            </p>
 
-      <div>
-        <label className="block text-sm">Annual rainfall (mm)</label>
-        <input type="number" {...register("rainfallMm")} className="input" />
-      </div>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+              {/* Location Section */}
+              <section>
+                <h3 className="text-lg font-semibold text-gray-800 border-b pb-2 mb-4">
+                  Location
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
+                    <select id="city" {...register("city")} className="input mt-1">
+                      {Object.keys(rainfall).map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="rainfallMm" className="block text-sm font-medium text-gray-700">Annual Rainfall (mm)</label>
+                    <input id="rainfallMm" type="number" {...register("rainfallMm")} className="input mt-1" />
+                    <p className="text-xs text-gray-500 mt-1">
+                      Auto-filled from city: {rainfall[city]?.rainfall_mm ?? "-"} mm
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-      <div>
-        <label className="block text-sm">Roof area (m²)</label>
-        <input type="number" {...register("roofAreaM2", { min: 10 })} className="input" />
-      </div>
+              {/* Roof Details Section */}
+              <section>
+                <h3 className="text-lg font-semibold text-gray-800 border-b pb-2 mb-4">
+                  Roof Details
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="roofAreaM2" className="block text-sm font-medium text-gray-700">Roof Area (m²)</label>
+                    <input id="roofAreaM2" type="number" {...register("roofAreaM2", { min: 10 })} className="input mt-1" />
+                  </div>
+                  <div>
+                    <label htmlFor="roofType" className="block text-sm font-medium text-gray-700">Roof Type</label>
+                    <select id="roofType" {...register("roofType")} className="input mt-1">
+                      <option value="rcc">RCC (coef 0.8)</option>
+                      <option value="tile">Tile (0.75)</option>
+                      <option value="metal">Metal (0.9)</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
 
-      <div>
-        <label className="block text-sm">Roof type</label>
-        <select {...register("roofType")} className="input">
-          <option value="rcc">RCC (coef 0.8)</option>
-          <option value="tile">Tile (0.75)</option>
-          <option value="metal">Metal (0.9)</option>
-        </select>
-      </div>
+              {/* Household & Site Section */}
+              <section>
+                <h3 className="text-lg font-semibold text-gray-800 border-b pb-2 mb-4">
+                  Household & Site
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="dwellers" className="block text-sm font-medium text-gray-700">No. of Dwellers</label>
+                    <input id="dwellers" type="number" {...register("dwellers")} className="input mt-1" />
+                  </div>
+                  <div>
+                    <label htmlFor="openSpace" className="block text-sm font-medium text-gray-700">Open Unpaved Space?</label>
+                    <select id="openSpace" {...register("openSpace")} className="input mt-1">
+                      <option value={true}>Yes</option>
+                      <option value={false}>No</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="rockySoil" className="block text-sm font-medium text-gray-700">Rocky Soil?</label>
+                    <select id="rockySoil" {...register("rockySoil")} className="input mt-1">
+                      <option value={false}>No</option>
+                      <option value={true}>Yes</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="linearSpaceM" className="block text-sm font-medium text-gray-700">Linear Space (m)</label>
+                    <input id="linearSpaceM" type="number" {...register("linearSpaceM")} className="input mt-1" />
+                  </div>
+                </div>
+              </section>
 
-      <div>
-        <label className="block text-sm">Open unpaved space?</label>
-        <select {...register("openSpace")} className="input">
-          <option value={true}>Yes</option>
-          <option value={false}>No</option>
-        </select>
+              <button type="submit" className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+                Calculate
+              </button>
+            </form>
+          </div>
+          <div className="hidden md:block bg-indigo-600 p-8">
+            <div className="flex flex-col justify-center h-full text-white">
+              <h3 className="text-2xl font-bold">Why Harvest Rainwater?</h3>
+              <p className="mt-3 text-indigo-200">
+                Turn your rooftop into a sustainable water source. Our calculator helps you understand the potential benefits.
+              </p>
+              <div className="mt-8 space-y-6">
+                <Benefit icon={icons.dollar} title="Reduce Water Bills">
+                  Lower your dependence on municipal water and see a significant drop in your monthly expenses.
+                </Benefit>
+                <Benefit icon={icons.leaf} title="Conserve Resources">
+                  Play a part in preserving a vital natural resource and promoting environmental sustainability.
+                </Benefit>
+                <Benefit icon={icons.layers} title="Support Groundwater">
+                  Help recharge local aquifers, improving the water table and ensuring water security for the community.
+                </Benefit>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div>
-        <label className="block text-sm">Rocky soil?</label>
-        <select {...register("rockySoil")} className="input">
-          <option value={false}>No</option>
-          <option value={true}>Yes</option>
-        </select>
-      </div>
-
-      <div className="md:col-span-2">
-        <label className="block text-sm">Linear space available (m)</label>
-        <input type="number" {...register("linearSpaceM")} className="input" />
-      </div>
-
-      <button className="md:col-span-2 bg-indigo-600 text-white px-4 py-2 rounded">Compute</button>
-    </form>
+    </div>
   );
 }

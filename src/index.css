@@ -2,3 +2,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Your small design system */
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl border border-slate-200 shadow-[0_4px_20px_rgba(2,6,23,0.06)];
+  }
+  .btn {
+    @apply inline-flex items-center justify-center h-10 px-4 rounded-lg font-medium;
+  }
+  .btn-primary {
+    @apply btn bg-sky-500 text-white hover:bg-sky-600;
+  }
+  .input {
+    @apply w-full h-10 rounded-lg border border-slate-300 px-3 bg-white
+           focus:outline-none focus:ring-2 focus:ring-sky-200 focus:border-sky-500;
+  }
+  .no-print { @apply print:hidden; }
+}
+
+/* PDF helpers */
+.avoid-break { break-inside: avoid; page-break-inside: avoid; }

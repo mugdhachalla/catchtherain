@@ -1,32 +1,212 @@
 {
-  "Bengaluru": { "state": "Karnataka", "rainfall_mm": 970, "lat": 12.971, "lon": 77.594 },
-  "Chennai": { "state": "Tamil Nadu", "rainfall_mm": 1400, "lat": 13.0827, "lon": 80.2707 },
-  "Delhi": { "state": "Delhi", "rainfall_mm": 800, "lat": 28.6139, "lon": 77.209 },
-  "Mumbai": { "state": "Maharashtra", "rainfall_mm": 2400, "lat": 19.076, "lon": 72.8777 },
-  "Hyderabad": { "state": "Telangana", "rainfall_mm": 790, "lat": 17.385, "lon": 78.486 },
-  "Kolkata": { "state": "West Bengal", "rainfall_mm": 1700, "lat": 22.5726, "lon": 88.3639 },
-  "Ahmedabad": { "state": "Gujarat", "rainfall_mm": 800, "lat": 23.0225, "lon": 72.5714 },
-  "Pune": { "state": "Maharashtra", "rainfall_mm": 720, "lat": 18.5204, "lon": 73.8567 },
-  "Jaipur": { "state": "Rajasthan", "rainfall_mm": 650, "lat": 26.9124, "lon": 75.7873 },
-  "Lucknow": { "state": "Uttar Pradesh", "rainfall_mm": 1010, "lat": 26.8467, "lon": 80.9462 },
-  "Bhopal": { "state": "Madhya Pradesh", "rainfall_mm": 1140, "lat": 23.2599, "lon": 77.4126 },
-  "Patna": { "state": "Bihar", "rainfall_mm": 1200, "lat": 25.5941, "lon": 85.1376 },
-  "Thiruvananthapuram": { "state": "Kerala", "rainfall_mm": 1800, "lat": 8.5241, "lon": 76.9366 },
-  "Ranchi": { "state": "Jharkhand", "rainfall_mm": 1430, "lat": 23.3441, "lon": 85.3096 },
-  "Guwahati": { "state": "Assam", "rainfall_mm": 1600, "lat": 26.1445, "lon": 91.7362 },
-  "Nagpur": { "state": "Maharashtra", "rainfall_mm": 1100, "lat": 21.1458, "lon": 79.0882 },
-  "Visakhapatnam": { "state": "Andhra Pradesh", "rainfall_mm": 1110, "lat": 17.6868, "lon": 83.2185 },
-  "Vadodara": { "state": "Gujarat", "rainfall_mm": 930, "lat": 22.3072, "lon": 73.1812 },
-  "Raipur": { "state": "Chhattisgarh", "rainfall_mm": 1300, "lat": 21.2514, "lon": 81.6296 },
-  "Dehradun": { "state": "Uttarakhand", "rainfall_mm": 2200, "lat": 30.3165, "lon": 78.0322 },
-  "Shimla": { "state": "Himachal Pradesh", "rainfall_mm": 1520, "lat": 31.1048, "lon": 77.1734 },
-  "Panaji": { "state": "Goa", "rainfall_mm": 2900, "lat": 15.4909, "lon": 73.8278 },
-  "Aizawl": { "state": "Mizoram", "rainfall_mm": 2400, "lat": 23.7271, "lon": 92.7176 },
-  "Kohima": { "state": "Nagaland", "rainfall_mm": 2000, "lat": 25.6747, "lon": 94.1109 },
-  "Agartala": { "state": "Tripura", "rainfall_mm": 2100, "lat": 23.8315, "lon": 91.2868 },
-  "Imphal": { "state": "Manipur", "rainfall_mm": 1500, "lat": 24.817, "lon": 93.9368 },
-  "Shillong": { "state": "Meghalaya", "rainfall_mm": 3300, "lat": 25.5788, "lon": 91.8933 },
-  "Itanagar": { "state": "Arunachal Pradesh", "rainfall_mm": 3000, "lat": 27.0844, "lon": 93.6053 },
-  "Srinagar": { "state": "Jammu & Kashmir", "rainfall_mm": 710, "lat": 34.0837, "lon": 74.7973 },
-  "Chandigarh": { "state": "Chandigarh", "rainfall_mm": 1100, "lat": 30.7333, "lon": 76.7794 }
+  "Bengaluru": {
+    "state": "Karnataka",
+    "rainfall_mm": 970,
+    "lat": 12.971,
+    "lon": 77.594,
+    "monthly_mm": [5, 8, 10, 40, 110, 150, 140, 140, 160, 120, 60, 27]
+  },
+  "Chennai": {
+    "state": "Tamil Nadu",
+    "rainfall_mm": 1400,
+    "lat": 13.0827,
+    "lon": 80.2707,
+    "monthly_mm": [10, 10, 10, 20, 50, 80, 90, 80, 120, 220, 360, 350]
+  },
+  "Delhi": {
+    "state": "Delhi",
+    "rainfall_mm": 800,
+    "lat": 28.6139,
+    "lon": 77.209,
+    "monthly_mm": [15, 15, 10, 10, 20, 95, 220, 230, 120, 45, 10, 10]
+  },
+  "Mumbai": {
+    "state": "Maharashtra",
+    "rainfall_mm": 2400,
+    "lat": 19.076,
+    "lon": 72.8777,
+    "monthly_mm": [1, 1, 2, 10, 100, 550, 800, 700, 200, 25, 8, 3]
+  },
+  "Hyderabad": {
+    "state": "Telangana",
+    "rainfall_mm": 790,
+    "lat": 17.385,
+    "lon": 78.486,
+    "monthly_mm": [5, 5, 10, 20, 40, 120, 220, 180, 130, 40, 15, 5]
+  },
+  "Kolkata": {
+    "state": "West Bengal",
+    "rainfall_mm": 1700,
+    "lat": 22.5726,
+    "lon": 88.3639,
+    "monthly_mm": [10, 15, 20, 40, 120, 300, 400, 350, 250, 140, 40, 15]
+  },
+  "Ahmedabad": {
+    "state": "Gujarat",
+    "rainfall_mm": 800,
+    "lat": 23.0225,
+    "lon": 72.5714,
+    "monthly_mm": [5, 2, 1, 2, 10, 124, 305, 238, 95, 10, 5, 3]
+  },
+  "Pune": {
+    "state": "Maharashtra",
+    "rainfall_mm": 720,
+    "lat": 18.5204,
+    "lon": 73.8567,
+    "monthly_mm": [5, 2, 5, 15, 40, 140, 180, 120, 130, 60, 20, 3]
+  },
+  "Jaipur": {
+    "state": "Rajasthan",
+    "rainfall_mm": 650,
+    "lat": 26.9124,
+    "lon": 75.7873,
+    "monthly_mm": [5, 5, 5, 10, 20, 70, 240, 220, 60, 10, 3, 2]
+  },
+  "Lucknow": {
+    "state": "Uttar Pradesh",
+    "rainfall_mm": 1010,
+    "lat": 26.8467,
+    "lon": 80.9462,
+    "monthly_mm": [15, 20, 10, 10, 25, 120, 300, 310, 160, 30, 5, 5]
+  },
+  "Bhopal": {
+    "state": "Madhya Pradesh",
+    "rainfall_mm": 1140,
+    "lat": 23.2599,
+    "lon": 77.4126,
+    "monthly_mm": [10, 10, 10, 5, 20, 140, 360, 380, 180, 20, 5, 0]
+  },
+  "Patna": {
+    "state": "Bihar",
+    "rainfall_mm": 1200,
+    "lat": 25.5941,
+    "lon": 85.1376,
+    "monthly_mm": [10, 10, 5, 15, 50, 180, 320, 350, 220, 30, 5, 5]
+  },
+  "Thiruvananthapuram": {
+    "state": "Kerala",
+    "rainfall_mm": 1800,
+    "lat": 8.5241,
+    "lon": 76.9366,
+    "monthly_mm": [20, 30, 50, 110, 250, 340, 220, 150, 150, 280, 160, 40]
+  },
+  "Ranchi": {
+    "state": "Jharkhand",
+    "rainfall_mm": 1430,
+    "lat": 23.3441,
+    "lon": 85.3096,
+    "monthly_mm": [20, 25, 25, 20, 60, 250, 350, 350, 250, 60, 10, 10]
+  },
+  "Guwahati": {
+    "state": "Assam",
+    "rainfall_mm": 1600,
+    "lat": 26.1445,
+    "lon": 91.7362,
+    "monthly_mm": [10, 20, 50, 150, 250, 300, 320, 250, 150, 80, 15, 5]
+  },
+  "Nagpur": {
+    "state": "Maharashtra",
+    "rainfall_mm": 1100,
+    "lat": 21.1458,
+    "lon": 79.0882,
+    "monthly_mm": [10, 15, 15, 20, 20, 180, 320, 280, 180, 50, 10, 0]
+  },
+  "Visakhapatnam": {
+    "state": "Andhra Pradesh",
+    "rainfall_mm": 1110,
+    "lat": 17.6868,
+    "lon": 83.2185,
+    "monthly_mm": [10, 10, 15, 30, 80, 120, 140, 160, 200, 280, 55, 10]
+  },
+  "Vadodara": {
+    "state": "Gujarat",
+    "rainfall_mm": 930,
+    "lat": 22.3072,
+    "lon": 73.1812,
+    "monthly_mm": [2, 1, 1, 2, 10, 150, 330, 280, 130, 20, 2, 2]
+  },
+  "Raipur": {
+    "state": "Chhattisgarh",
+    "rainfall_mm": 1300,
+    "lat": 21.2514,
+    "lon": 81.6296,
+    "monthly_mm": [10, 15, 15, 15, 25, 200, 380, 360, 220, 50, 10, 0]
+  },
+  "Dehradun": {
+    "state": "Uttarakhand",
+    "rainfall_mm": 2200,
+    "lat": 30.3165,
+    "lon": 78.0322,
+    "monthly_mm": [50, 60, 50, 30, 60, 250, 650, 680, 280, 60, 20, 10]
+  },
+  "Shimla": {
+    "state": "Himachal Pradesh",
+    "rainfall_mm": 1520,
+    "lat": 31.1048,
+    "lon": 77.1734,
+    "monthly_mm": [60, 70, 60, 50, 70, 150, 400, 380, 180, 50, 20, 30]
+  },
+  "Panaji": {
+    "state": "Goa",
+    "rainfall_mm": 2900,
+    "lat": 15.4909,
+    "lon": 73.8278,
+    "monthly_mm": [2, 1, 1, 10, 80, 850, 950, 600, 250, 120, 30, 6]
+  },
+  "Aizawl": {
+    "state": "Mizoram",
+    "rainfall_mm": 2400,
+    "lat": 23.7271,
+    "lon": 92.7176,
+    "monthly_mm": [15, 40, 90, 180, 300, 450, 400, 350, 300, 200, 60, 15]
+  },
+  "Kohima": {
+    "state": "Nagaland",
+    "rainfall_mm": 2000,
+    "lat": 25.6747,
+    "lon": 94.1109,
+    "monthly_mm": [15, 35, 60, 100, 250, 400, 420, 350, 250, 100, 15, 5]
+  },
+  "Agartala": {
+    "state": "Tripura",
+    "rainfall_mm": 2100,
+    "lat": 23.8315,
+    "lon": 91.2868,
+    "monthly_mm": [20, 50, 120, 220, 350, 450, 380, 280, 150, 60, 15, 5]
+  },
+  "Imphal": {
+    "state": "Manipur",
+    "rainfall_mm": 1500,
+    "lat": 24.817,
+    "lon": 93.9368,
+    "monthly_mm": [20, 40, 80, 120, 200, 300, 280, 220, 150, 80, 10, 0]
+  },
+  "Shillong": {
+    "state": "Meghalaya",
+    "rainfall_mm": 3300,
+    "lat": 25.5788,
+    "lon": 91.8933,
+    "monthly_mm": [20, 30, 60, 150, 300, 600, 800, 650, 400, 250, 30, 10]
+  },
+  "Itanagar": {
+    "state": "Arunachal Pradesh",
+    "rainfall_mm": 3000,
+    "lat": 27.0844,
+    "lon": 93.6053,
+    "monthly_mm": [40, 60, 100, 200, 350, 550, 600, 500, 350, 180, 50, 20]
+  },
+  "Srinagar": {
+    "state": "Jammu & Kashmir",
+    "rainfall_mm": 710,
+    "lat": 34.0837,
+    "lon": 74.7973,
+    "monthly_mm": [60, 70, 90, 100, 80, 40, 60, 60, 50, 40, 30, 30]
+  },
+  "Chandigarh": {
+    "state": "Chandigarh",
+    "rainfall_mm": 1100,
+    "lat": 30.7333,
+    "lon": 76.7794,
+    "monthly_mm": [40, 40, 30, 20, 40, 150, 300, 320, 130, 20, 5, 5]
+  }
 }
