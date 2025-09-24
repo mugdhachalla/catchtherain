@@ -284,11 +284,11 @@ export default function Results() {
         </div>
       </div>
 
-      {/* Optional site capacity rows (only if you compute them) */}
+      {/* Optional site capacity rows (only if you compute them) recommended and surplus recharge have the same formula, currently using same formula*/}
       <div className="pdf-grid-2" style={{ marginTop: 12 }}>
         <div className="pdf-card">
           <div className="pdf-label">Surplus Recharge (min(Harvest − Stored,Site Capacity))</div>
-          <div className="pdf-value">{fmtInt(results?.surplusRecharge)} L</div>
+          <div className="pdf-value">{fmtInt(results?.recommendedRecharge)} L</div>
         </div>
         <div className="pdf-card">
           <div className="pdf-label">Site Recharge Capacity</div>
