@@ -1,11 +1,11 @@
-# 🌧️ Catch the Rain – Rooftop Rainwater Harvesting Calculator
+# Catch the Rain – Rooftop Rainwater Harvesting Calculator
 
 An interactive web app that helps individuals and communities quickly **assess the feasibility, structures, and benefits of rooftop rainwater harvesting (RTRWH)**.  
-Built for **Smart India Hackathon 2025** by Team Cloud 6. 🚀  
+Built for **Smart India Hackathon 2025** by Team Cloud 6. 
 
 ---
 
-## 📌 Problem Statement
+##  Problem Statement
 Groundwater replenishment is critical for sustainable water resources.  
 While manuals and guidelines exist from the **Central Ground Water Board (CGWB)**, they are **technical and not user-friendly**.  
 There is no simple digital tool where citizens can check:
@@ -15,7 +15,7 @@ There is no simple digital tool where citizens can check:
 
 ---
 
-## 💡 Our Solution
+## Our Solution
 We developed a **web application** that:
 - Accepts simple inputs: location, roof area, open space, dwellers  
 - Provides **instant outputs**:
@@ -25,38 +25,40 @@ We developed a **web application** that:
   - Local rainfall and groundwater info  
   - Cost estimation & payback period  
 - Generates a **PDF report**  
-- Accessible via **web + WhatsApp integration**  
 
 ---
 
-## ✨ Key Features
-- 📊 **KPI Cards** – Annual harvest, cost, payback, recharge potential  
-- 📉 **Charts** – Monthly harvest distribution  
-- 📖 **Guidelines & Glossary** – Easy understanding of RWH terms  
-- 📍 **Geolocation + Rainfall Data** – Auto-fill city/rainfall  
-- 📥 **Downloadable Reports** – One-click PDF export  
-- 🌐 **Regional Languages (future)** – Inclusivity and accessibility  
-- 🛰️ **Future: Satellite View Auto-fill** – Auto-detect roof area & open space  
-- 🔗 **Future: Marketplace Integration (UrbanClap/Urban Company)** – One-click connect to verified contractors with pre-filled requirements  
+## Key Features
+-  **KPI Cards** – Annual harvest, cost, payback, recharge potential  
+-  **Charts** – Monthly harvest distribution  
+-  **Guidelines & Glossary** – Easy understanding of RWH terms  
+-  **Geolocation + Rainfall Data** – Auto-fill city/rainfall  
+-  **Downloadable Reports** – One-click PDF export  
+-  **Future: Regional Languages** – Inclusivity and accessibility  
+-  **Future: Satellite View Auto-fill** – Auto-detect roof area & open space  
+-  **Future: Marketplace Integration (UrbanClap/Urban Company)** – One-click connect to verified contractors with pre-filled requirements 
+-  **Future: WhatsApp Chatbot** – By integrating ChatGPT API or LLMS the bot can understand natural language 
+  and respond in regional languages  
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 - **Frontend:** React + Vite + Tailwind CSS  
 - **State Management:** Zustand  
 - **Forms & Validation:** React Hook Form  
 - **Charts:** Recharts  
-- **PDF Export:** html2pdf.js (moving to react-to-print option)  
+- **PDF Export:** html2pdf.js 
 - **Icons:** Lucide React  
 - **Backend (Planned):** Node.js + Express + PostgreSQL (for persistence, analytics, contractor integration)  
-- **APIs/Data:**  
+- **APIs/Data (Planned):**  
   - CGWB datasets (aquifers, groundwater)  
   - OpenWeather API (rainfall)  
   - GIS/Maps API (future roof area auto-detection)  
+  - WhatsApp API (for chatbot)
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone repo
 ```bash
@@ -89,3 +91,7 @@ The build output is in /dist.
 - Gamified rewards & incentives for citizens who implement RWH
 
 - WhatsApp Chatbot with LLM 
+
+## View Demo
+### Follow the link below to view the web app-hosted on Netlify
+https://catchtherain.netlify.app/
