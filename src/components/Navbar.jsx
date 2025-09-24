@@ -34,7 +34,7 @@ export function Navbar() {
                 Catch the Rain
               </span>
               <span className="block text-xs text-gray-500 -mt-0.5">
-                Water Harvesting
+                Where it falls, When it falls
               </span>
             </div>
           </Link>

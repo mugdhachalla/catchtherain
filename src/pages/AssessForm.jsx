@@ -30,8 +30,8 @@ export default function AssessForm() {
 
   const { register, handleSubmit, watch, setValue } = useForm({
     defaultValues: {
-      city: "Bengaluru",
-      rainfallMm: rainfall["Bengaluru"]?.rainfall_mm ?? 970,
+      city: "Guwahati",
+      rainfallMm: rainfall["Guwahati"]?.rainfall_mm ?? 1600,
       roofAreaM2: inputs.roofAreaM2 ?? 100,
       roofType: inputs.roofType ?? "rcc",
       openSpace: inputs.openSpace ?? true,
@@ -60,7 +60,9 @@ export default function AssessForm() {
 
         if (nearest) {
           setCity(nearest);
-          const found = rulesData.rules.find(r => r["City"] === nearest);
+          const found = rulesData.rules.find(r =>
+            r["City"]?.toLowerCase().includes(nearest.toLowerCase())
+          );
           setRule(found ? found.Rule : "");
           
           const mm = rainfall[nearest].rainfall_mm;
@@ -87,6 +89,16 @@ export default function AssessForm() {
       setValue("rainfallMm", mm, { shouldDirty: true });
     }
   }, [city, setValue]);
+
+  //city mandate uncase curr location permission is denied
+  useEffect(() => {
+    if (city) {
+      const found = rulesData.rules.find(r =>
+        r["City"]?.toLowerCase().includes(city.toLowerCase())
+      );
+      setRule(found ? found.Rule : "");
+    }
+  }, [city]);
 
   const onSubmit = (data) => {
     const num = (v) => Number(v ?? 0);
