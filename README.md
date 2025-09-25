@@ -1,4 +1,4 @@
-# Catch the Rain – Rooftop Rainwater Harvesting Calculator
+# Catch the Rain – Rooftop Rainwater Harvesting CAssessment
 
 An interactive web app that helps individuals and communities quickly **assess the feasibility, structures, and benefits of rooftop rainwater harvesting (RTRWH)**.  
 Built for **Smart India Hackathon 2025** by Team Cloud 6. 
