@@ -24,6 +24,7 @@ We developed a **web application** that:
   - Estimated harvested water volume  
   - Local rainfall and groundwater info  
   - Cost estimation & payback period  
+  - Artifical Recharge Potential
 - Generates a **PDF report**  
 
 ---
@@ -34,9 +35,11 @@ We developed a **web application** that:
 -  **Guidelines & Glossary** – Easy understanding of RWH terms  
 -  **Geolocation + Rainfall Data** – Auto-fill city/rainfall  
 -  **Downloadable Reports** – One-click PDF export  
+-  **Mandates Info** – City/state-specific RWH rules shown with info icon  
+-  **Future: Dashboard** – Government view to monitor adoption & impact  
 -  **Future: Regional Languages** – Inclusivity and accessibility  
 -  **Future: Satellite View Auto-fill** – Auto-detect roof area & open space  
--  **Future: Marketplace Integration (UrbanClap/Urban Company)** – One-click connect to verified contractors with pre-filled requirements 
+-  **Future: Marketplace Integration** – One-click connect to verified contractors with pre-filled requirements 
 -  **Future: WhatsApp Chatbot** – By integrating ChatGPT API or LLMS the bot can understand natural language 
   and respond in regional languages  
 
@@ -54,9 +57,41 @@ We developed a **web application** that:
   - CGWB datasets (aquifers, groundwater)  
   - OpenWeather API (rainfall)  
   - GIS/Maps API (future roof area auto-detection)  
-  - WhatsApp API (for chatbot)
+  - WhatsApp API (for chatbot) 
+- **Netlify** → Frontend deployment  
+- Git + GitHub → Version control  
 
 ---
+## Future Enhancements
+
+- Satellite/GIS integration to auto-detect roof & open space
+
+- Integration with marketplaces for one-click contractor booking
+
+- Gamified rewards & incentives for citizens who implement RWH
+
+- WhatsApp Chatbot with Sarvam AI Integration
+
+- Government Dashboard: City/district-wise adoption, verified implementations, KPIs, and compliance tracking.  
+
+## Project Structure
+```bash
+rtrwh/
+│
+├── src/
+│ ├── components/ # Reusable UI components (Navbar, KPI, Charts, Cards)
+│ ├── pages/ # Pages (Home, AssessForm, Results, Dashboard, Guidelines)
+│ ├── store/ # Zustand state management
+│ ├── data/ # Rainfall + Rules JSON datasets
+│ ├── lib/ # Formulas and Calculations
+│ └── App.jsx # Main routes
+│
+├── public/ # Static assets (logos, images, icons)
+├── index.html # Main HTML entry point
+├── tailwind.config.js # TailwindCSS configuration
+├── postcss.config.cjs # PostCSS configuration
+└── package.json # Project metadata & dependencies
+```
 
 ## Getting Started
 
@@ -76,21 +111,6 @@ npm run dev
 ```
 App runs on http://localhost:5173
 
-### 4. Build for production
-```bash
-npm run build
-```
-The build output is in /dist.
-
-## Future Enhancements
-
-- Satellite/GIS integration to auto-detect roof & open space
-
-- Integration with UrbanClap/Urban Company for one-click contractor booking
-
-- Gamified rewards & incentives for citizens who implement RWH
-
-- WhatsApp Chatbot with LLM 
 
 ## View Demo
 ### Follow the link below to view the web app-hosted on Netlify
