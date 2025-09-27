@@ -219,7 +219,7 @@ export default function AssessForm() {
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="dwellers" className="block text-sm font-medium text-gray-700">No. of Dwellers</label>
+                    <label htmlFor="dwellers" className="block text-sm font-medium text-gray-700">No. of Dwellers(No. of Occupants)</label>
                     <input id="dwellers" type="number" {...register("dwellers")} className="input mt-1" />
                   </div>
                   <div>
