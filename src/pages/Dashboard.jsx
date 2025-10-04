@@ -40,6 +40,8 @@ const Dashboard = () => {
     { city: "Chennai", potential: 1276000, implemented: 38 },
     { city: "Bengaluru", potential: 924000, implemented: 42 },
     { city: "Kolkata", potential: 1582000, implemented: 35 },
+    { city: "Shillong", potential: 350000, implemented: 25 },
+    { city: "Indore", potential: 850000, implemented: 48 },
     { city: "Hyderabad", potential: 800000, implemented: 40 }
   ];
   const points = [

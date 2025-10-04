@@ -44,6 +44,8 @@ export default function ImpactMap({ points = [], height = "24rem" }) {
           attribution='&copy; OpenStreetMap'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        
+
         <FitBounds points={points} />
 
         {/* ✅ Bubble overlay made non-interactive so tooltips work */}
