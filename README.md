@@ -1,7 +1,7 @@
 # Catch the Rain – Rooftop Rainwater Harvesting Assessment
 
 An interactive web app that helps individuals and communities quickly **assess the feasibility, structures, and benefits of rooftop rainwater harvesting (RTRWH)**.  
-Built for **Smart India Hackathon 2025** by Team Cloud 6. 
+Built for **Smart India Hackathon 2025** by Team Cloud6. 
 
 ---
 
@@ -115,3 +115,5 @@ App runs on http://localhost:5173
 ## View Demo
 ### Follow the link below to view the web app-hosted on Netlify
 https://catchtherain.netlify.app/
+
+© 2025 Team cloud6. All rights reserved
